@@ -1,6 +1,10 @@
+import { Button } from "@/components/ui/button"
+
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+      <Button size='lg' variant='outline'>click me</Button>
+    </div>
   )
 }
 export default HomePage
