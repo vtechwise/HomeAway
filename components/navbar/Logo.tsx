@@ -4,9 +4,9 @@ import { LuTent } from "react-icons/lu";
 
 const Logo = () => {
   return (
-    <Button asChild>
+    <Button asChild size={"icon"}>
       <Link href={"/"}>
-        <LuTent />
+        <LuTent className="w-6 h-6" />
       </Link>
     </Button>
   );
