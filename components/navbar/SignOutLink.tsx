@@ -1,4 +1,15 @@
+import { SignOutButton } from "@clerk/nextjs";
+import { Button } from "../ui/button";
+import { toast } from "sonner";
+
 const SignOutLink = () => {
-  return <div>SignOutLink</div>;
+  const handleLogout = () => {
+    toast.success("you have been logged out successfully");
+  };
+  return (
+    <SignOutButton redirectUrl="/">
+      <button className="w-full text-left">Log Out</button>
+    </SignOutButton>
+  );
 };
 export default SignOutLink;
