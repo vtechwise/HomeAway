@@ -8,9 +8,7 @@ const SignOutLink = () => {
   };
   return (
     <SignOutButton redirectUrl="/">
-      <Button className="w-full text-left" onClick={handleLogout}>
-        Sign Out
-      </Button>
+      <button className="w-full text-left">Log Out</button>
     </SignOutButton>
   );
 };
