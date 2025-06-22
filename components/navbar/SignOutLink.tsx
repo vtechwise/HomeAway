@@ -1,5 +1,4 @@
 import { SignOutButton } from "@clerk/nextjs";
-import { Button } from "../ui/button";
 import { toast } from "sonner";
 
 const SignOutLink = () => {
