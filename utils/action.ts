@@ -4,6 +4,18 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { profileScheme } from "./schemes";
 import db from "./db";
+import { redirect } from "next/navigation";
+
+const getAuthUser = async () => {
+  const user = await currentUser();
+  if (!user) {
+    throw new Error("Please login to access this route");
+  }
+  if (!user.privateMetadata.hasProfile) {
+    redirect("/profile/create");
+  }
+  return user;
+};
 
 export const createProfileAction = async (
   prevState: any,
@@ -31,12 +43,13 @@ export const createProfileAction = async (
       },
     });
     console.log(validatedData);
-    return { message: "profile created successfully" };
+    // return { message: "profile created successfully" };
   } catch (error) {
     return {
       message: error instanceof Error ? error.message : "there was an error",
     };
   }
+  return redirect("/");
 };
 
 export const fetchUserImage = async () => {
@@ -52,4 +65,17 @@ export const fetchUserImage = async () => {
     },
   });
   return profile?.profileImage;
+};
+
+export const fetchProfile = async () => {
+  const user = await getAuthUser();
+  const profile = await db.profile.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+  });
+  if (!profile) {
+    redirect("profile/create");
+  }
+  return profile;
 };
